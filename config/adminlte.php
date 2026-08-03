@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'CiCoSyS',
+    'title' => 'SysCaC',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -10,7 +10,7 @@ return [
     'use_full_favicon' => false,
 
     'google_fonts' => [
-        'allowed' => true,
+        'allowed' => false,
     ],
 
     /*
@@ -18,19 +18,19 @@ return [
     | Branding
     |------------------------------------------------------------------
     */
-    'logo' => '<span style="color:#20e3b2;font-weight:600">CiCo</span><span style="color:#ffffff;font-weight:300">SyS</span>',
-    'logo_img' => 'vendor/adminlte/dist/img/logo2.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_alt' => 'CiCoSyS',
+    'logo' => '<span class="syscac-brand-name"><b>Sys</b>CaC</span>',
+    'logo_img' => 'vendor/adminlte/dist/img/logo1.png',
+    'logo_img_class' => 'brand-image elevation-0 syscac-brand-logo',
+    'logo_img_alt' => 'Asociación CAC Promoción 90 JP',
 
     'auth_logo' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/logo2.png',
-            'alt' => 'CiCoSyS',
-            'class' => 'img-circle elevation-3',
-            'width' => 70,
-            'height' => 70,
+            'path' => 'vendor/adminlte/dist/img/logo1.png',
+            'alt' => 'Asociación CAC Promoción 90 JP',
+            'class' => 'syscac-auth-logo elevation-0',
+            'width' => 92,
+            'height' => 92,
         ],
     ],
 
@@ -43,8 +43,8 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/logo2.png',
-            'alt' => 'Cargando CiCoSyS...',
+            'path' => 'vendor/adminlte/dist/img/logo1.png',
+            'alt' => 'Cargando SysCaC...',
             'effect' => 'animation__pulse',
             'width' => 80,
             'height' => 80,
@@ -58,7 +58,7 @@ return [
     */
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-info',
+    'usermenu_header_class' => 'syscac-user-header',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
@@ -80,17 +80,17 @@ return [
     | Auth Views
     |------------------------------------------------------------------
     */
-    'classes_auth_card' => 'card-outline card-info shadow',
-    'classes_auth_btn' => 'btn-flat btn-info',
+    'classes_auth_card' => 'syscac-auth-card',
+    'classes_auth_btn' => 'btn-primary',
 
     /*
     |------------------------------------------------------------------
     | Admin Panel Classes
     |------------------------------------------------------------------
     */
-    'classes_body' => 'text-sm',
-    'classes_sidebar' => 'sidebar-dark-info elevation-4',
-    'classes_topnav' => 'navbar-light shadow-sm',
+    'classes_body' => 'text-sm syscac-theme',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-0',
+    'classes_topnav' => 'navbar-white navbar-light elevation-0',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container-fluid',
 
@@ -134,22 +134,73 @@ return [
             'text' => 'Usuarios',
             'icon' => 'fas fa-users-cog',
             'submenu' => [
-                ['text' => 'Roles', 'url' => 'admin/roles', 'icon' => 'fas fa-user-shield'],
-                ['text' => 'Usuarios', 'url' => 'admin/users', 'icon' => 'fas fa-users'],
+                ['text' => 'Roles', 'url' => 'admin/roles', 'icon' => 'fas fa-user-shield', 'can' => 'admin.roles.index'],
+                ['text' => 'Usuarios', 'url' => 'admin/users', 'icon' => 'fas fa-users', 'can' => 'admin.users.index'],
             ],
         ],
 
-        ['header' => 'NEGOCIO'],
-        ['text' => 'Categorías', 'url' => 'admin/categories', 'icon' => 'fas fa-layer-group'],
-        ['text' => 'Posts', 'url' => 'admin/posts', 'icon' => 'fas fas fa-newspaper'],
-        ['text' => 'Paginas', 'url' => 'admin/pages', 'icon' => 'fas fas fa-file-alt'],
-        ['text' => 'Productos', 'url' => 'admin/products', 'icon' => 'fas fa-boxes'],
-        ['text' => 'Clientes', 'url' => 'admin/clients', 'icon' => 'fas fa-user-tie'],
-        ['text' => 'Garantes', 'url' => 'admin/guarantors', 'icon' => 'fas fa-user-shield'],
-
-        ['header' => 'FINANZAS'],
-        ['text' => 'Préstamos', 'url' => 'admin/loans', 'icon' => 'fas fa-hand-holding-usd'],
-        ['text' => 'Pagos', 'url' => 'admin/loan-payments', 'icon' => 'fas fa-cash-register'],
+        ['header' => 'SISTEMA SYSCAC'],
+        [
+            'text' => 'Socios',
+            'icon' => 'fas fa-users',
+            'submenu' => [
+                ['text' => 'Socios', 'url' => 'admin/socios', 'icon' => 'fas fa-users', 'can' => 'admin.socios.index'],
+                ['text' => 'Avales / Garantes', 'url' => 'admin/avales', 'icon' => 'fas fa-user-shield', 'can' => 'avales.index'],
+            ],
+        ],
+        ['text' => 'Retiro de socios', 'url' => 'admin/retiros-socios', 'icon' => 'fas fa-user-slash', 'can' => 'retiros.index'],
+        ['text' => 'Familiares', 'url' => 'admin/familiares', 'icon' => 'fas fa-user-friends', 'can' => 'admin.socios.index'],
+        ['text' => 'Acciones / Aportes', 'url' => 'admin/acciones', 'icon' => 'fas fa-coins', 'can' => 'admin.acciones.index'],
+        [
+            'text' => 'Prestamos',
+            'icon' => 'fas fa-hand-holding-usd',
+            'can' => 'admin.simulaciones.index',
+            'submenu' => [
+                ['text' => 'Simulador', 'url' => 'admin/prestamos/simulador', 'icon' => 'fas fa-calculator', 'can' => 'admin.simulaciones.index'],
+                ['text' => 'Prestamos', 'url' => 'admin/prestamos', 'icon' => 'fas fa-file-invoice-dollar', 'can' => 'admin.prestamos.index'],
+                ['text' => 'Cronograma de cuotas', 'url' => 'admin/cuotas', 'icon' => 'fas fa-calendar-alt', 'can' => 'admin.prestamos.index'],
+                ['text' => 'Cobros', 'url' => 'admin/cobros', 'icon' => 'fas fa-cash-register', 'can' => 'admin.cobros.index'],
+                ['text' => 'Configuración de mora', 'url' => 'admin/mora', 'icon' => 'fas fa-clock', 'can' => 'mora.index'],
+                ['text' => 'Refinanciamientos', 'url' => 'admin/refinanciamientos', 'icon' => 'fas fa-sync-alt', 'can' => 'admin.refinanciamientos.index'],
+            ],
+        ],
+        [
+            'text' => 'Caja',
+            'icon' => 'fas fa-cash-register',
+            'can' => 'admin.caja.index',
+            'submenu' => [
+                ['text' => 'Movimientos de caja', 'url' => 'admin/caja', 'icon' => 'fas fa-cash-register', 'can' => 'admin.caja.index'],
+                ['text' => 'Solidaridad', 'url' => 'admin/solidaridad', 'icon' => 'fas fa-hands-helping', 'can' => 'admin.solidaridad.index'],
+                ['text' => 'Fondo administrativo', 'url' => 'admin/fondo-administrativo', 'icon' => 'fas fa-file-invoice-dollar', 'can' => 'admin.fondo-administrativo.index'],
+                ['text' => 'Actividades', 'url' => 'admin/actividades', 'icon' => 'fas fa-calendar-check', 'can' => 'admin.actividades.index'],
+            ],
+        ],
+        [
+            'text' => 'Utilidades',
+            'url' => 'admin/utilidades',
+            'icon' => 'fas fa-chart-pie',
+            'can' => 'admin.utilidades.index',
+        ],
+        [
+            'text' => 'Reportes',
+            'url' => 'admin/reportes',
+            'icon' => 'fas fa-chart-bar',
+            'can' => 'reportes.index',
+            'submenu' => [
+                ['text' => 'Socios', 'url' => 'admin/reportes/socios-vigentes', 'icon' => 'fas fa-users', 'can' => 'reportes.socios_vigentes'],
+                ['text' => 'Acciones', 'url' => 'admin/reportes/acciones-general', 'icon' => 'fas fa-coins', 'can' => 'reportes.acciones_general'],
+                ['text' => 'Prestamos', 'url' => 'admin/reportes/prestamos-activos', 'icon' => 'fas fa-hand-holding-usd', 'can' => 'reportes.prestamos_activos'],
+                ['text' => 'Cobros', 'url' => 'admin/reportes/cobros-diarios', 'icon' => 'fas fa-receipt', 'can' => 'reportes.cobros_diarios'],
+                ['text' => 'Caja', 'url' => 'admin/reportes/caja-general', 'icon' => 'fas fa-cash-register', 'can' => 'reportes.caja_general'],
+                ['text' => 'Solidaridad', 'url' => 'admin/reportes/solidaridad', 'icon' => 'fas fa-hands-helping', 'can' => 'reportes.solidaridad'],
+                ['text' => 'Actividades', 'url' => 'admin/reportes/actividades', 'icon' => 'fas fa-calendar-check', 'can' => 'reportes.actividades'],
+                ['text' => 'Utilidades', 'url' => 'admin/reportes/utilidades-socio', 'icon' => 'fas fa-chart-pie', 'can' => 'reportes.utilidades_socio'],
+                ['text' => 'Historial por socio', 'url' => 'admin/reportes/historial-socio', 'icon' => 'fas fa-address-card', 'can' => 'reportes.historial_socio'],
+                ['text' => 'Historial crediticio', 'url' => 'admin/reportes/historial-crediticio', 'icon' => 'fas fa-chart-line', 'can' => 'credit-history.report'],
+                ['text' => 'Mora', 'url' => 'admin/mora-reporte', 'icon' => 'fas fa-clock', 'can' => 'mora.report'],
+            ],
+        ],
+        ['text' => 'Recibos', 'url' => 'admin/recibos', 'icon' => 'fas fa-receipt', 'can' => 'admin.recibos.index'],
 
         ['header' => 'CUENTA'],
         ['text' => 'Perfil', 'url' => 'admin/settings', 'icon' => 'fas fa-user'],
@@ -256,6 +307,7 @@ return [
     */
     'custom_css' => [
         'css/cicosys-theme.css',
+        'css/syscac-theme.css',
     ],
 
     'livewire' => false,

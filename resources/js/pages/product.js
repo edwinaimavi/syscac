@@ -83,17 +83,28 @@ document.addEventListener('DOMContentLoaded', function () {
         $.get(`/admin/products/${id}/edit`, function (res) {
 
             // ============================
+            // 🔥 LLENAR PRECIOS
+            // ============================
+            if (res.prices) {
+                for (let typeId in res.prices) {
+                    $(`input[name="prices[${typeId}]"]`).val(res.prices[typeId]);
+                }
+            }
+
+            // ============================
             // DATOS
             // ============================
             $('#name').val(res.name);
+            $('#model').val(res.model);
             $('#slug').val(res.slug);
             $('#category_id').val(res.category_id);
             $('#short_description').val(res.short_description);
-            $('#description').val(res.description);
+            tinymce.get('description').setContent(res.description || '');
             $('#price').val(res.price);
             $('#type').val(res.type);
 
             $('#status').prop('checked', res.status === 'published');
+            $('#brand_id').val(res.brand_id);
 
             // ============================
             // LIMPIAR
@@ -140,6 +151,8 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         if (!lock('productSave')) return;
+
+        tinymce.triggerSave();
 
         const $form = $(this);
         const $btn = $('#btnSaveProduct');
@@ -240,6 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ============================
     $('#productModal').on('hidden.bs.modal', function () {
 
+
+        // limpiar precios dinámicos
+        $('input[name^="prices"]').val('');
         unlock('productSave');
 
         $('#productForm')[0].reset();
@@ -281,8 +297,10 @@ document.addEventListener('DOMContentLoaded', function () {
         $.get(url, function (res) {
             console.log(res);
             $('#viewProductName').text(res.name);
+            $('#viewProductModel').text(res.model || '—');
             $('#viewProductSlug').text(res.slug);
             $('#viewProductCategory').text(res.category);
+            $('#viewProductBrand').text(res.brand || '—');
             $('#viewProductPrice').text(res.price);
             $('#viewProductType').text(res.type);
             $('#viewProductCreatedAt').text(res.created_at);
@@ -293,6 +311,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     : '<span class="badge badge-secondary">Borrador</span>'
             );
 
+
+            let pricesHtml = '';
+
+            if (res.prices && res.prices.length > 0) {
+                res.prices.forEach(p => {
+                    pricesHtml += `
+            <div class="d-flex justify-content-between border-bottom py-1">
+                <span><i class="fas fa-tag mr-1 text-info"></i> ${p.type}</span>
+                <strong>${p.price}</strong>
+            </div>
+        `;
+                });
+            } else {
+                pricesHtml = '<span class="text-muted">Sin precios</span>';
+            }
+
+            $('#viewProductPrices').html(pricesHtml);
             // ============================
             // 🔥 GALERÍA PRO
             // ============================
@@ -466,6 +501,20 @@ document.addEventListener('DOMContentLoaded', function () {
            });
        }
     */
+
+    tinymce.init({
+        selector: '#description',
+        width: "100%",
+        height: 400,
+        statubar: true,
+        plugins: [
+            "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+    });
+
 });
 
 

@@ -1,0 +1,14 @@
+<div class="modal fade cash-modal" id="profitPayModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content">
+        <div class="modal-header member-modal-header"><div class="member-modal-titlebar"><div class="member-modal-icon"><i class="fas fa-hand-holding-usd"></i></div><div><h5 class="modal-title mb-0">Pagar utilidad</h5><small>Pago individual al socio</small></div></div><button type="button" class="close ml-3" data-dismiss="modal"><span>&times;</span></button></div>
+        <form id="profitPayForm" enctype="multipart/form-data">@csrf
+            <div class="modal-body member-modal-body">
+                <div id="profit-pay-error-messages" class="alert alert-danger d-none"></div>
+                <input type="hidden" id="profitPayDetailId">
+                <section class="member-detail-card"><h6><i class="fas fa-user"></i> Socio</h6><div class="member-detail-grid"><div><span>Socio</span><strong id="payProfitMember">-</strong></div><div><span>DNI</span><strong id="payProfitDni">-</strong></div><div><span>Acciones</span><strong id="payProfitShares">-</strong></div><div><span>Participacion</span><strong id="payProfitPercent">-</strong></div><div><span>Monto utilidad</span><strong id="payProfitAmount">S/ 0.00</strong></div><div><span>Pendiente</span><strong id="payProfitPending">S/ 0.00</strong></div></div></section>
+                <section class="member-section"><div class="form-row"><div class="form-group col-md-6"><label>Metodo pago <span class="text-danger">*</span></label><select class="form-control form-control-sm" name="payment_method" required>@foreach($paymentMethods as $value => $label)<option value="{{ $value }}">{{ $label }}</option>@endforeach</select></div><div class="form-group col-md-6"><label>Referencia <span id="profitPayReferenceRequired" class="text-danger d-none">*</span></label><input type="text" class="form-control form-control-sm" name="payment_reference" maxlength="100"></div></div><div class="form-group"><label>Comprobante</label><label class="share-upload-box mb-0" for="profitPayVoucher"><i class="fas fa-paperclip"></i><span id="profitPayVoucherName">JPG, PNG, WEBP o PDF - max. 4 MB</span></label><input type="file" class="d-none" id="profitPayVoucher" name="voucher_path" accept="image/jpeg,image/jpg,image/png,image/webp,application/pdf"></div><div class="form-group mb-0"><label>Observacion</label><textarea class="form-control form-control-sm" name="observation" rows="2"></textarea></div></section>
+            </div>
+            <div class="modal-footer member-modal-footer"><button type="button" class="btn btn-light border" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Pagar utilidad</button></div>
+        </form>
+    </div></div>
+</div>

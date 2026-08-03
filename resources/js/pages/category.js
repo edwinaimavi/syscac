@@ -24,7 +24,21 @@ function unlock(action) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    let IMG_WIDTH = 500;
+    let IMG_HEIGHT = 400;
 
+    const uploadBox = document.getElementById('uploadBox');
+
+    if (uploadBox) {
+        IMG_WIDTH = parseInt(uploadBox.dataset.width || 500);
+        IMG_HEIGHT = parseInt(uploadBox.dataset.height || 400);
+    }
+
+    // Mostrar en UI
+    const sizeText = document.getElementById('imgSizeText');
+    if (sizeText) {
+        sizeText.innerText = `${IMG_WIDTH}x${IMG_HEIGHT}`;
+    }
 
     // CSRF
     $.ajaxSetup({
@@ -68,10 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         columns: [
             { data: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'description', name: 'description' },
-            { data: 'status', name: 'status', orderable: false },
+            { data: 'id' },
+            { data: 'name' },
+            { data: 'parent', name: 'parent', orderable: false },
+            { data: 'description' },
+            { data: 'status', orderable: false },
             { data: 'acciones', orderable: false, searchable: false }
         ],
         responsive: true,
@@ -341,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (cropper) cropper.destroy();
 
                 cropper = new Cropper(imageToCrop, {
-                    aspectRatio: 500 / 400,
+                    aspectRatio: IMG_WIDTH / IMG_HEIGHT,
                     viewMode: 1,
                     dragMode: 'move',
 
@@ -381,8 +396,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('cropImageBtn').addEventListener('click', function () {
 
         let canvas = cropper.getCroppedCanvas({
-            width: 500,
-            height: 400
+            width: IMG_WIDTH,
+            height: IMG_HEIGHT
         });
 
         let croppedImage = canvas.toDataURL('image/jpeg');
@@ -441,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 🔥 IMPORTANTE
         removeImageFlag = true;
     });
-    const uploadBox = document.getElementById('uploadBox');
+   /*  const uploadBox = document.getElementById('uploadBox'); */
 
     uploadBox.addEventListener('dragover', function (e) {
         e.preventDefault();

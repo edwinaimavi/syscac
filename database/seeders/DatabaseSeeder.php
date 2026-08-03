@@ -18,37 +18,21 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
+            LateFeePermissionSeeder::class,
+            ReportPermissionSeeder::class,
+            AdministrativeFundPermissionSeeder::class,
         ]);
 
-        User::factory()->create([
-            'name' => 'Edwin Cigueñas',
+        User::firstOrCreate([
             'email' => 'edwin.3acp@gmail.com',
+        ], [
+            'name' => 'Edwin Cigueñas',
             'password' => bcrypt('12345678'),
         ])->assignRole('Administrador');
         User::factory(3)->create();
 
         $this->call([
-            /*  CategorySeeder::class, */
-            PostSeeder::class,
-            PageSeeder::class,
-            BrandSeeder::class,
-            /* ProductSeeder::class, */
-
-            /* PersonSeeder::class,
-            ClientSeeder::class,
-            MembershipSeeder::class,
-            AttendanceSeeder::class,
-            PaymentSeeder::class, */
-            /* BranchSeeder::class,
-        ClientSeeder::class,
-        ClientContactSeeder::class,
-        GuarantorSeeder::class,
-        VehicleSeeder::class,
-        LoanSeeder::class,
-        LoanDisbursementSeeder::class,
-        LoanPaymentSeeder::class,
-        LoanInstallmentSeeder::class,
-        CollateralSeeder::class, */
+          
         ]);
     }
 }

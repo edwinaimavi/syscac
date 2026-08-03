@@ -1,0 +1,6 @@
+<?php
+uses(Tests\TestCase::class);
+use App\Models\LateFeeSetting; use App\Models\LoanInstallment; use App\Services\LateFeeService; use Illuminate\Support\Carbon;
+it('does not charge within grace days', function(){ $s=new LateFeeSetting(['grace_days'=>5,'calculation_type'=>'fixed_daily','value'=>2]); $i=new LoanInstallment(['due_date'=>'2026-08-10','remaining_amount'=>100,'status'=>'pendiente','late_fee_paid'=>0,'late_fee_waived'=>0]); $q=(new LateFeeService)->quote($i,Carbon::parse('2026-08-14'),$s); expect($q['days'])->toBe(0)->and($q['amount'])->toBe(0.0); });
+it('charges five real late days after grace', function(){ $s=new LateFeeSetting(['grace_days'=>5,'calculation_type'=>'fixed_daily','value'=>2]); $i=new LoanInstallment(['due_date'=>'2026-08-10','remaining_amount'=>100,'status'=>'pendiente','late_fee_paid'=>0,'late_fee_waived'=>0]); $q=(new LateFeeService)->quote($i,Carbon::parse('2026-08-20'),$s); expect($q['days'])->toBe(5)->and($q['amount'])->toBe(10.0); });
+it('calculates percentage and respects maximum', function(){ $s=new LateFeeSetting(['grace_days'=>0,'calculation_type'=>'percentage_daily','value'=>10,'max_amount'=>25]); $i=new LoanInstallment(['due_date'=>'2026-08-10','remaining_amount'=>100,'status'=>'pendiente','late_fee_paid'=>0,'late_fee_waived'=>0]); expect((new LateFeeService)->quote($i,'2026-08-20',$s)['amount'])->toBe(25.0); });

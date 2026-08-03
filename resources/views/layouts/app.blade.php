@@ -674,5 +674,100 @@
                 0 6px 14px rgba(0, 0, 0, .25),
                 inset 0 3px 6px rgba(0, 0, 0, .25);
         }
+
+
+        
+        /* CONTENEDOR */
+        .upload-box-modern {
+            border: 2px dashed #d9e2ec;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .upload-box-modern:hover {
+            border-color: #5a67d8;
+            background: #f7f9ff;
+        }
+
+        /* PLACEHOLDER */
+        .upload-placeholder i {
+            font-size: 30px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .upload-placeholder p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .upload-placeholder small {
+            color: #94a3b8;
+        }
+
+        /* PREVIEW */
+        #imagePreview {
+            position: relative;
+        }
+
+        #imagePreview img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* BOTÓN ELIMINAR */
+        .btn-remove {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+
+
+
+
+        }
+
+
+
+        .cropper-view-box {
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .cropper-face {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+
+        .upload-box-modern.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .upload-box-modern.no-upload {
+            cursor: not-allowed;
+        }
+
+        .upload-box-modern.no-upload #uploadPlaceholder {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+    
     </style>
+
+    <link rel="stylesheet" href="{{ asset('css/syscac-theme.css') }}?v={{ filemtime(public_path('css/syscac-theme.css')) }}">
 @endpush

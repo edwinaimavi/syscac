@@ -1,0 +1,14 @@
+<div class="modal fade cash-detail-modal" id="refDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document"><div class="modal-content">
+        <div class="modal-header member-modal-header"><div class="member-modal-titlebar"><div class="member-modal-icon"><i class="fas fa-sync-alt"></i></div><div><h5 class="modal-title mb-0">Detalle del refinanciamiento</h5><small>Trazabilidad del cambio de deuda</small></div></div><button type="button" class="close ml-3" data-dismiss="modal"><span>&times;</span></button></div>
+        <div class="modal-body member-modal-body">
+            <div class="cash-detail-hero"><div><span>Refinanciamiento</span><h4 id="detailRefCode">-</h4><p id="detailRefMember">-</p></div><div id="detailRefStatus">-</div></div>
+            <div class="cash-detail-summary"><div><span>Prestamo original</span><strong id="detailRefOriginal">-</strong></div><div><span>Nuevo prestamo</span><strong id="detailRefNew">-</strong></div><div><span>Saldo anterior</span><strong id="detailRefPrevious">S/ 0.00</strong></div><div><span>Nuevo monto</span><strong id="detailRefAmount">S/ 0.00</strong></div></div>
+            <div class="row">
+                <div class="col-lg-6"><section class="member-detail-card"><h6><i class="fas fa-user"></i> Datos</h6><div class="member-detail-grid"><div><span>Fecha</span><strong id="detailRefDate">-</strong></div><div><span>DNI</span><strong id="detailRefDni">-</strong></div><div><span>Monto adicional</span><strong id="detailRefAdditional">-</strong></div><div><span>Tasa</span><strong id="detailRefRate">-</strong></div><div><span>Plazo</span><strong id="detailRefTerm">-</strong></div><div><span>Total a pagar</span><strong id="detailRefTotal">-</strong></div></div></section></div>
+                <div class="col-lg-6"><section class="member-detail-card"><h6><i class="fas fa-clipboard"></i> Auditoria</h6><div class="member-detail-grid"><div><span>Total interes</span><strong id="detailRefInterest">-</strong></div><div><span>Registrado por</span><strong id="detailRefUser">-</strong></div><div><span>Creado</span><strong id="detailRefCreated">-</strong></div></div><div class="member-detail-note mt-3"><strong>Motivo</strong><br><span id="detailRefReason">-</span><br><strong>Observacion</strong><br><span id="detailRefObservation">-</span></div></section></div>
+                <div class="col-12"><section class="member-detail-card mb-0"><h6><i class="fas fa-history"></i> Cuotas cerradas del prestamo original</h6><div class="table-responsive"><table class="table table-sm table-hover text-center mb-0"><thead><tr><th>ID cuota</th><th>Pagado</th><th>Pendiente</th><th>Estado anterior</th></tr></thead><tbody id="detailRefClosedRows"></tbody></table></div></section></div>
+            </div>
+        </div>
+    </div></div>
+</div>
