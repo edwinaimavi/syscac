@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/pages/user.js',
+                'resources/js/pages/roles.js',
                 'resources/js/pages/member.js',
                 'resources/js/pages/guarantor.js',
                 'resources/js/pages/member-share.js',
